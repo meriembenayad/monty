@@ -37,6 +37,13 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+typedef struct interpreter_s
+{
+	stack_t **stack;
+	unsigned int line_number;
+	instruction_t *op_func;
+} interpreter_t;
+
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
