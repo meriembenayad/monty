@@ -1,11 +1,20 @@
-#ifndef MONTY_H
-#define MONTY_H
+#ifndef _MAIN_H
+#define _MAIN_H
 
+#define _POSIX_C_SOURCE 200809L
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <string.h>
+#include <unistd.h>
+#include <ctype.h>
+
+extern int n;
+
+#define uint unsigned int
+
+extern int number;
+#define DELIM "\n\t\r "
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -34,26 +43,35 @@ typedef struct stack_s
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_number);
+	void (*f)(stack_t **stack, uint line_number);
 } instruction_t;
 
-typedef struct interpreter_s
-{
-	stack_t **stack;
-	unsigned int line_number;
-	instruction_t *op_func;
-} interpreter_t;
+/*executed function */
+void exec_cmd(char **argv);
+int is_comment(char *token, int line_counter);
+int is_number(char *token);
 
-void push(stack_t **stack, unsigned int line_number);
-void pall(stack_t **stack, unsigned int line_number);
-void pint(stack_t **stack, unsigned int line_number);
-void pop(stack_t **stack, unsigned int line_number);
-void swap(stack_t **stack, unsigned int line_number);
-void add(stack_t **stack, unsigned int line_number);
-void sub(stack_t **stack, unsigned int line_number);
-void nop(stack_t **stack, unsigned int line_number);
+/* opcodes.c */
+void (*get_opcodes(char *token, uint line_number))(stack_t **, uint);
 
-int _isdigit(char *str);
-stack_t *add_node(stack_t **stack, const int n);
+/* stack_functions_1.c */
+void push(stack_t **topstack, uint line_number);
+void pall(stack_t **topstack, uint line_number);
+void pint(stack_t **topstack, uint line_number);
+void pop(stack_t **topstack, uint line_number);
+void swap(stack_t **topstack, uint line_number);
 
-#endif
+/* stack_functions_2.c */
+void nop(stack_t **topstack, uint line_number);
+void add(stack_t **topstack, uint line_number);
+void sub(stack_t **topstack, uint line_number);
+void _div(stack_t **topstack, uint line_number);
+void mul(stack_t **topstack, uint line_number);
+
+/* stack_functions_3.c */
+void mod(stack_t **topstack, uint line_number);
+void free_stack(stack_t *topstack);
+void open_error(char **argv);
+void int_err(uint line);
+
+#endif /* _MONTY_H_ */

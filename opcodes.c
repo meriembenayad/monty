@@ -1,79 +1,39 @@
 #include "monty.h"
+
 /**
+ * get_opcodes - This function gets the opcode.
  *
+ * @token: Token to compare.
+ * @line_number: line_number number of the opcode.
+ * Return: Pointer to the function.
  */
-void push(stack_t **stack, unsigned int line_number)
+
+void (*get_opcodes(char *token, uint line_number))(stack_t **, uint)
 {
-	char *arg = strtok(NULL, "\n\t\r ");
-	int n;
-
-	if (arg == NULL || _isdigit(arg))
+	int i;
+	instruction_t operation[] = {
+	    {"push", push},
+	    {"pall", pall},
+	    {"pint", pint},
+	    {"pop", pop},
+	    {"swap", swap},
+	    {"nop", nop},
+	    {"add", add},
+	    {"sub", sub},
+	    {"_div", _div},
+	    {"mul", mul},
+	    {"mod", mod},
+	    {NULL, NULL}};
+	for (i = 0; operation[i].opcode != NULL; i++)
 	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
+		if (strcmp(token, operation[i].opcode) == 0)
+		{
+			return (operation[i].f);
+		}
 	}
 
-	n = atoi(arg);
+	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
+	exit(EXIT_FAILURE);
 
-	if (!add_node(stack, n))
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-}
-
-void pall(stack_t **stack, unsigned int line_number)
-{
-	stack_t *current = *stack;
-
-	(void)line_number;
-
-	while (current)
-	{
-		printf("%d\n", current->n);
-		current = current->next;
-	}
-}
-
-void pint(stack_t **stack, unsigned int line_number)
-{
-	if (!stack || !*stack)
-	{
-		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	printf("%d\n", (*stack)->n);
-}
-
-void pop(stack_t **stack, unsigned int line_number)
-{
-	stack_t *temp;
-
-	if (!stack || !*stack)
-	{
-		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	temp = *stack;
-	*stack = (*stack)->next;
-	if (*stack)
-		(*stack)->prev = NULL;
-	free(temp);
-}
-
-void swap(stack_t **stack, unsigned int line_number)
-{
-	int temp;
-
-	if (!stack || !*stack || !(*stack)->next)
-	{
-		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	temp = (*stack)->n;
-	(*stack)->n = (*stack)->next->n;
-	(*stack)->next->n = temp;
+	return (NULL);
 }
