@@ -79,9 +79,9 @@ void _div(stack_t **topstack, uint line_number)
 	}
 
 	(*topstack)->next->n /= (*topstack)->n;
-	*topstack = (*topstack)->next;
+	/* *topstack = (*topstack)->next; */
 	pop(topstack, line_number);
-	free(topstack);
+	/* free(topstack); */
 }
 
 /**
