@@ -12,38 +12,38 @@ int number;
 
 void push(stack_t **topstack, uint line_number)
 {
-	stack_t *NewNode, *last;
+	stack_t *new_node, *last;
 
 	(void)line_number;
-	NewNode = malloc(sizeof(stack_t));
+	new_node = malloc(sizeof(stack_t));
 
-	if (NewNode == NULL)
+	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
-	NewNode->n = number;
-	NewNode->prev = NULL;
-	NewNode->next = NULL;
+	new_node->n = number;
+	new_node->prev = NULL;
+	new_node->next = NULL;
 
 	if (*topstack == NULL) /* Validate if empty list*/
 	{
-		*topstack = NewNode;
+		*topstack = new_node;
 	}
 	else if (data_structure_type == 1) /* If it's a queue */
 	{
 		last = *topstack;
 		while (last->next != NULL) /* Go to the end */
 			last = last->next;
-		NewNode->prev = last;
-		last->next = NewNode;
+		new_node->prev = last;
+		last->next = new_node;
 	}
 	else /* if it's not empty list and it's a stack */
 	{
-		NewNode->next = *topstack;
-		(*topstack)->prev = NewNode;
-		*topstack = NewNode;
+		new_node->next = *topstack;
+		(*topstack)->prev = new_node;
+		*topstack = new_node;
 	}
 }
 
