@@ -48,7 +48,7 @@ typedef struct instruction_s
 /*executed function */
 void exec_cmd(char **argv);
 int is_comment(char *token, int line_counter);
-int is_number(char *token);
+int is_number(char *str);
 
 /* opcodes.c */
 void (*get_opcodes(char *token, uint line_number))(stack_t **, uint);

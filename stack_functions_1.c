@@ -12,15 +12,17 @@ int data_structure_type = 0; /* 0 for stack, 1 for queue */
 void push(stack_t **topstack, unsigned int line_number)
 {
 	stack_t *new_node, *last;
+	int num;
+	char *arg;
 
 	/* Check if arg is NULL or not an integer */
-	if (DELIM == NULL || !is_number(DELIM))
+	if (arg == NULL || !is_number(arg))
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
-	num = atoi(DELIM);
+	num = atoi(arg);
 
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
@@ -52,6 +54,7 @@ void push(stack_t **topstack, unsigned int line_number)
 		*topstack = new_node;
 	}
 }
+
 /**
  * pall - This function prints all the values on the stack.
  *

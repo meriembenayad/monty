@@ -75,17 +75,17 @@ void exec_cmd(char **argv)
  *
  * Return: 1 if the string is a valid number, -1 otherwise.
  */
-int is_number(char *token)
+int is_number(char *str)
 {
 	int i;
 
-	if (token == NULL)
-		return (-1);
+	if (str == NULL)
+		return (0);
 
-	for (i = 0; token[i] != '\0'; i++)
+	for (i = 0; str[i] != '\0'; i++)
 	{
-		if (token[i] != '-' && isdigit(token[i]) == 0)
-			return (-1);
+		if (str[i] != '-' && isdigit(str[i]) == 0)
+			return (0);
 	}
 
 	return (1);
