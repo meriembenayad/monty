@@ -9,23 +9,47 @@ int data_structure_type = 0; /* 0 for stack, 1 for queue */
  * @line_number: line_number number of the opcode.
  */
 
-void push(stack_t **stack, unsigned int line_number)
+void push(stack_t **topstack, unsigned int line_number)
 {
-	char *arg = strtok(NULL, "\n\t\r ");
-	int n;
+	stack_t *new_node, *last;
 
-	if (arg == NULL || _isdigit(arg))
+	/* Check if arg is NULL or not an integer */
+	if (DELIM == NULL || !is_number(arg))
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
-	n = atoi(arg);
+	num = atoi(arg);
 
-	if (!add_node(stack, n))
+	new_node = malloc(sizeof(stack_t));
+	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
+	}
+
+	new_node->n = num;
+	new_node->prev = NULL;
+	new_node->next = NULL;
+
+	if (*topstack == NULL) /* Validate if empty list*/
+	{
+		*topstack = new_node;
+	}
+	else if (data_structure_type == 1) /* If it's a queue */
+	{
+		last = *topstack;
+		while (last->next != NULL) /* Go to the end */
+			last = last->next;
+		new_node->prev = last;
+		last->next = new_node;
+	}
+	else /* if it's not empty list and it's a stack */
+	{
+		new_node->next = *topstack;
+		(*topstack)->prev = new_node;
+		*topstack = new_node;
 	}
 }
 /**
