@@ -81,6 +81,7 @@ void _div(stack_t **topstack, uint line_number)
 
 	tmp->next->n = tmp->next->n / tmp->n;
 	*topstack = tmp->next;
+	pop(topstack, line_number);
 	free(tmp);
 }
 
@@ -104,4 +105,5 @@ void mul(stack_t **topstack, uint line_number)
 	tmp = (*topstack)->next;
 	tmp->n *= (*topstack)->n;
 	pop(topstack, line_number);
+	free(tmp);
 }
