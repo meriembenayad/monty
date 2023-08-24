@@ -63,25 +63,25 @@ void sub(stack_t **topstack, uint line_number)
  * @line_number: line_number number of the opcode.
  */
 
-void _div(stack_t **topstack, uint line_number)
+void div(stack_t **topstack, unsigned int line_number)
 {
-	stack_t *tmp = *topstack;
+	stack_t *tmp;
 
-	if (tmp == NULL || tmp->next == NULL)
+	if (*topstack == NULL || (*topstack)->next == NULL)
 	{
-		fprintf(stderr, "L%u: can't _div, stack too short\n", line_number);
+		fprintf(stderr, "L%u: can't div, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
-	if (tmp->n == 0)
+	if ((*topstack)->n == 0)
 	{
 		fprintf(stderr, "L%u: division by zero\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
-	tmp->next->n = tmp->next->n / tmp->n;
-	*topstack = tmp->next;
-	free(tmp);
+	tmp = (*topstack)->next;
+	tmp->n /= (*topstack)->n;
+	pop(topstack, line_number);
 }
 
 /**
