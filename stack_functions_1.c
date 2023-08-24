@@ -59,6 +59,8 @@ void pall(stack_t **topstack, uint line_number)
 	stack_t *tmp = *topstack;
 
 	(void)line_number;
+	if (!tmp)
+		return;
 
 	while (tmp != NULL)
 	{

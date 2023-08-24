@@ -24,6 +24,7 @@ void (*get_opcodes(char *token, uint line_number))(stack_t **, uint)
 	    {"mul", mul},
 	    {"mod", mod},
 	    {NULL, NULL}};
+
 	for (i = 0; operation[i].opcode != NULL; i++)
 	{
 		if (strcmp(token, operation[i].opcode) == 0)
