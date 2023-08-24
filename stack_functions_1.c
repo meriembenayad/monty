@@ -20,7 +20,7 @@ void push(stack_t **topstack, uint line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	new_node->n = num;
+	new_node->n = number;
 	new_node->prev = NULL;
 	new_node->next = NULL;
 
