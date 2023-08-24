@@ -14,7 +14,7 @@ void push(stack_t **topstack, unsigned int line_number)
 	stack_t *new_node, *last;
 
 	/* Check if arg is NULL or not an integer */
-	if (DELIM == NULL || !is_number(arg))
+	if (DELIM == NULL || !is_number(DELIM))
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
