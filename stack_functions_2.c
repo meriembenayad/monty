@@ -79,9 +79,10 @@ void _div(stack_t **topstack, uint line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	tmp->next->n = tmp->next->n / tmp->n;
-	*topstack = tmp->next;
-	free(tmp);
+	tmp->next->n /= tmp->n;
+	pop(tmp, line_number);
+	/* *topstack = tmp->next;
+	free(tmp); */
 }
 
 /**
