@@ -80,9 +80,9 @@ void _div(stack_t **topstack, uint line_number)
 	}
 
 	tmp->next->n /= tmp->n;
-	pop(tmp, line_number);
-	/* *topstack = tmp->next;
-	free(tmp); */
+	*topstack = tmp->next;
+	pop(topstack, line_number);
+	free(topstack);
 }
 
 /**
