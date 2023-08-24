@@ -1,6 +1,7 @@
 #include "monty.h"
 
 int data_structure_type = 0; /* 0 for stack, 1 for queue */
+int number;
 
 /**
  * push - This function pushes an element to the stack.
@@ -12,26 +13,17 @@ int data_structure_type = 0; /* 0 for stack, 1 for queue */
 void push(stack_t **topstack, uint line_number)
 {
 	stack_t *new_node, *last;
-	int num;
-	char *arg;
 
-	/* Check if arg is NULL or not an integer */
-	if (arg == NULL || !is_number(arg))
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	num = atoi(arg);
-
+	(void)line_number;
 	new_node = malloc(sizeof(stack_t));
+
 	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
-	new_node->n = num;
+	new_node->n = number;
 	new_node->prev = NULL;
 	new_node->next = NULL;
 
