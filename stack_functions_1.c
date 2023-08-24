@@ -9,7 +9,7 @@ int data_structure_type = 0; /* 0 for stack, 1 for queue */
  * @line_number: line_number number of the opcode.
  */
 
-void push(stack_t **topstack, unsigned int line_number)
+void push(stack_t **topstack, uint line_number)
 {
 	stack_t *new_node, *last;
 	int num;
