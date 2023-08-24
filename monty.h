@@ -13,6 +13,8 @@ extern int n;
 
 #define uint unsigned int
 
+extern int data_structure_type = 0; /* 0 for stack, 1 for queue */
+
 extern int number;
 #define DELIM "\n\t\r "
 
@@ -50,6 +52,7 @@ typedef struct instruction_s
 void exec_cmd(char **argv);
 int is_comment(char *token, int line_counter);
 int is_number(char *token);
+int is_integer(char *str);
 
 /* opcodes.c */
 void (*get_opcodes(char *token, uint line_number))(stack_t **, uint);

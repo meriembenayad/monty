@@ -69,6 +69,22 @@ void exec_cmd(char **argv)
 	free_stack(topstack);
 }
 
+int is_integer(char *str)
+{
+	int i;
+
+	if (str == NULL)
+		return (0);
+
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		if (!isdigit(str[i]))
+			return (0);
+	}
+
+	return (1);
+}
+
 /**
  * is_number - Checks if a string represents a valid number.
  * @token: The string to check.
