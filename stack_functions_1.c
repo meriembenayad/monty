@@ -20,7 +20,7 @@ void push(stack_t **topstack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	num = atoi(arg);
+	num = atoi(DELIM);
 
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
