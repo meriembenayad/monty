@@ -62,10 +62,13 @@ void pall(stack_t **topstack, uint line_number)
 	if (!tmp)
 		return;
 
-	while (tmp != NULL)
+	if (!tmp)
 	{
-		printf("%d\n", tmp->n);
-		tmp = tmp->next;
+		while (tmp != NULL)
+		{
+			printf("%d\n", tmp->n);
+			tmp = tmp->next;
+		}
 	}
 }
 
