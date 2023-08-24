@@ -7,19 +7,13 @@
  * @line_number: line_number number of the opcode.
  */
 
-void push(stack_t **topstack, char *arg, unsigned int line_number)
+void push(stack_t **topstack, uint line_number)
 {
 	stack_t *new_node, *last;
-	int num;
 
-	/* Check if arg is NULL or not an integer */
-	if (arg == NULL || !is_integer(arg))
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-	num = atoi(arg);
+	(void)line_number;
 	new_node = malloc(sizeof(stack_t));
+
 	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
@@ -60,6 +54,7 @@ void push(stack_t **topstack, char *arg, unsigned int line_number)
 void pall(stack_t **topstack, uint line_number)
 {
 	stack_t *tmp = *topstack;
+
 	(void)line_number;
 
 	while (tmp != NULL)
