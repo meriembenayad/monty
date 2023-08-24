@@ -13,8 +13,6 @@ extern int n;
 
 #define uint unsigned int
 
-extern int data_structure_type = 0; /* 0 for stack, 1 for queue */
-
 extern int number;
 #define DELIM "\n\t\r "
 

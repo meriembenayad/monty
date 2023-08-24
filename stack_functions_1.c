@@ -1,5 +1,8 @@
 #include "monty.h"
 
+int data_structure_type = 0; /* 0 for stack, 1 for queue */
+int number;
+
 /**
  * push - This function pushes an element to the stack.
  *
