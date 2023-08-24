@@ -1,7 +1,6 @@
 #include "monty.h"
 
 int data_structure_type = 0; /* 0 for stack, 1 for queue */
-int number;
 
 /**
  * push - This function pushes an element to the stack.
@@ -10,43 +9,25 @@ int number;
  * @line_number: line_number number of the opcode.
  */
 
-void push(stack_t **topstack, uint line_number)
+void push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *new_node, *last;
+	char *arg = strtok(NULL, "\n\t\r ");
+	int n;
 
-	(void)line_number;
-	new_node = malloc(sizeof(stack_t));
+	if (arg == NULL || _isdigit(arg))
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 
-	if (new_node == NULL)
+	n = atoi(arg);
+
+	if (!add_node(stack, n))
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-
-	new_node->n = number;
-	new_node->prev = NULL;
-	new_node->next = NULL;
-
-	if (*topstack == NULL) /* Validate if empty list*/
-	{
-		*topstack = new_node;
-	}
-	else if (data_structure_type == 1) /* If it's a queue */
-	{
-		last = *topstack;
-		while (last->next != NULL) /* Go to the end */
-			last = last->next;
-		new_node->prev = last;
-		last->next = new_node;
-	}
-	else /* if it's not empty list and it's a stack */
-	{
-		new_node->next = *topstack;
-		(*topstack)->prev = new_node;
-		*topstack = new_node;
-	}
 }
-
 /**
  * pall - This function prints all the values on the stack.
  *
@@ -57,18 +38,12 @@ void push(stack_t **topstack, uint line_number)
 void pall(stack_t **topstack, uint line_number)
 {
 	stack_t *tmp = *topstack;
-
 	(void)line_number;
-	if (!tmp)
-		return;
 
-	if (!tmp)
+	while (tmp != NULL)
 	{
-		while (tmp != NULL)
-		{
-			printf("%d\n", tmp->n);
-			tmp = tmp->next;
-		}
+		printf("%d\n", tmp->n);
+		tmp = tmp->next;
 	}
 }
 

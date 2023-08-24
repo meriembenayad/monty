@@ -13,7 +13,6 @@ extern int n;
 
 #define uint unsigned int
 
-extern int number;
 #define DELIM "\n\t\r "
 
 /**
